@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101522"><title>Vocab 3600</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand">📚 <span>Vocab 3600</span></div>
+  <nav>
+    <button data-view="dashboard">Dashboard</button><button data-view="words">Words</button>
+    <button data-view="quiz">Quiz</button><button data-view="review">Review</button>
+  </nav>
+  <button id="theme" class="small">☾</button>
+</header>
+
+<main>
+<section id="dashboard" class="view active">
+  <div class="hero"><div><h1>Your Vocabulary</h1><p>Build, review and master your English words.</p></div><button class="primary" onclick="openEditor()">＋ Add Word</button></div>
+  <div class="stats">
+    <div><b id="sTotal">0</b><span>Total</span></div><div><b id="sNew">0</b><span>New</span></div>
+    <div><b id="sLearning">0</b><span>Learning</span></div><div><b id="sLearned">0</b><span>Learned</span></div>
+  </div>
+  <div class="grid2">
+    <div class="panel"><h2>Progress</h2><div id="progress"></div></div>
+    <div class="panel"><h2>Today's review</h2><p id="reviewInfo"></p><button class="primary" onclick="showView('review')">Start Review →</button></div>
+  </div>
+</section>
+
+<section id="words" class="view">
+  <div class="sectionHead"><div><h1>Vocabulary</h1><p id="wordCount"></p></div><button class="primary" onclick="openEditor()">＋ Add Word</button></div>
+  <div class="toolbar">
+    <input id="search" placeholder="🔎 Search word, meaning, example..." oninput="renderWords()">
+    <select id="status" onchange="renderWords()"><option value="all">All status</option><option>new</option><option>learning</option><option>learned</option><option>favorite</option></select>
+    <select id="level" onchange="renderWords()"><option value="all">All levels</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option></select>
+    <select id="sort" onchange="renderWords()"><option value="az">A → Z</option><option value="za">Z → A</option><option value="newest">Newest</option></select>
+  </div>
+  <div id="wordList"></div>
+</section>
+
+<section id="quiz" class="view"><div class="sectionHead"><div><h1>Quiz</h1><p>Test your vocabulary.</p></div><button class="primary" onclick="newQuiz()">New question</button></div><div id="quizBox" class="quiz"></div></section>
+
+<section id="review" class="view"><div class="sectionHead"><div><h1>Smart Review</h1><p>Review words that are due.</p></div><button class="primary" onclick="startReview()">Start</button></div><div id="reviewBox" class="quiz"></div></section>
+</main>
+
+<div id="modal" class="modal hidden"><div class="modalCard">
+  <div class="modalTop"><h2 id="modalTitle">Add Word</h2><button class="close" onclick="closeEditor()">×</button></div>
+  <form id="wordForm">
+    <input type="hidden" id="editId">
+    <label>Word<input id="fWord" required></label>
+    <div class="two"><label>Meaning<input id="fMeaning"></label><label>Level<select id="fLevel"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option></select></label></div>
+    <div class="two"><label>IPA<input id="fIpa" placeholder="/ˈ.../"></label><label>Part of speech<input id="fPos" placeholder="noun, verb..."></label></div>
+    <label>Examples <small>One example per line</small><textarea id="fExamples" rows="4"></textarea></label>
+    <div class="two"><label>Synonyms<input id="fSyn"></label><label>Antonyms<input id="fAnt"></label></div>
+    <label>Collocations<input id="fColl"></label>
+    <label>Word forms<input id="fForms"></label>
+    <label>Audio URL <input id="fAudio" placeholder="https://.../audio.mp3"></label>
+    <label>YouTube / Video URL <input id="fVideo" placeholder="https://youtube.com/..."></label>
+    <label>Image URLs <small>One URL per line (or use files in images/)</small><textarea id="fImages" rows="3"></textarea></label>
+    <div class="formBtns"><button type="button" onclick="closeEditor()">Cancel</button><button class="primary">Save Word</button></div>
+  </form>
+</div></div>
+
+<footer>Vocab 3600 • Data is stored in your browser</footer>
+<script src="app.js"></script>
+</body></html>
